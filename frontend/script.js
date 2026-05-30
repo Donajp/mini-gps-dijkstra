@@ -5,19 +5,16 @@ class Aresta {
     }
 }
 
-
 class Grafo {
     constructor() {
         this.map = new Map(); 
     }
 
     adicionarRua(origem, destino, peso) {
-        
         if (!this.map.has(origem)) {
             this.map.set(origem, []);
         }
         this.map.get(origem).push(new Aresta(destino, peso));
-        
         
         if (!this.map.has(destino)) {
             this.map.set(destino, []);
@@ -25,7 +22,6 @@ class Grafo {
         this.map.get(destino).push(new Aresta(origem, peso));
     }
 }
-
 
 class Dijkstra {
     static menorCaminho(grafo, inicio, destinoFinal) {
@@ -77,44 +73,60 @@ class Dijkstra {
     }
 }
 
-
 function mostrarCaminho() {
     const cidade = new Grafo();
 
-    // dados exatos do Java
     cidade.adicionarRua("Praça", "Mercado", 5);
     cidade.adicionarRua("Praça", "Estação", 2);
     cidade.adicionarRua("Mercado", "Hospital", 1);
     cidade.adicionarRua("Estação", "Hospital", 3);
     cidade.adicionarRua("Hospital", "Parque", 4);
-    // le as escolhas do ususario 
+
     const selectOrigem = document.getElementById('origem');
     const selectDestino = document.getElementById('destino');
-
+    
     const inicio = selectOrigem.value;
     const destino = selectDestino.value; 
 
-    if (inicio === destino){
-        document.getElementById('resultado').innerHTML = `<p style="color: red;">Origem e destino são os mesmos.</p>`;
-        return;
+    const painelResultado = document.getElementById('resultado');
+
+    
+    const todasAsLinhas = document.querySelectorAll('.linha');
+    todasAsLinhas.forEach(linha => linha.classList.remove('linha-brilhante'));
+
+    if (inicio === destino) {
+        painelResultado.innerHTML = `
+            <p style="color: #d32f2f; font-weight: bold;">Você já está no seu destino!</p>
+        `;
+        return; 
     }
 
-
-    // Roda o algoritmo
     const resultado = Dijkstra.menorCaminho(cidade, inicio, destino);
 
-    // Mostra na tela
-    const painelResultado = document.getElementById('resultado');
-    
-    // Verifica se achou um caminho
     if (resultado.distanciaTotal === Infinity) {
         painelResultado.innerHTML = `<p style="color: red;">Nenhum caminho encontrado de ${inicio} para ${destino}.</p>`;
     } else {
         painelResultado.innerHTML = `
             <h3 style="color: #333;">Resultado do GPS:</h3>
             <p><strong>De:</strong> ${inicio} <strong>Para:</strong> ${destino}</p>
-            <p><strong>Menor Caminho:</strong> ${resultado.caminho.join(' -> ')}</p>
+            <p><strong>Menor Caminho:</strong> ${resultado.caminho.join(' ➔ ')}</p>
             <p><strong>Distância Total:</strong> ${resultado.distanciaTotal}</p>
         `;
+
+        // 2. ACENDE AS LUZES DA ROTA
+        const caminho = resultado.caminho;
+        for (let i = 0; i < caminho.length - 1; i++) {
+            const cidadeA = caminho[i];
+            const cidadeB = caminho[i + 1];
+
+            let idLinha1 = `linha-${cidadeA}-${cidadeB}`;
+            let idLinha2 = `linha-${cidadeB}-${cidadeA}`;
+
+            let linhaSvg = document.getElementById(idLinha1) || document.getElementById(idLinha2);
+            
+            if (linhaSvg) {
+                linhaSvg.classList.add('linha-brilhante');
+            }
+        }
     }
 }
