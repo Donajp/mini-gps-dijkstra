@@ -1,0 +1,124 @@
+/* Configurações da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 20px;
+    text-align: center;
+}
+
+/* O container principal do mapa */
+.map {
+    position: relative;
+    width: 700px; 
+    height: 380px;
+    margin: 40px auto; 
+    border: 1px dashed #ccc; 
+}
+
+/* Bolinhas (Cidades) */
+.node {
+    position: absolute;
+    width: 80px; 
+    height: 80px;
+    background-color: #7B1FA2; 
+    color: white;
+    font-size: 14px; 
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; 
+    z-index: 2; 
+}
+
+/* Posicionamento exato de cada cidade no mapa */
+#node-praca {
+    top: 140px;
+    left: 40px;
+}
+
+#node-mercado {
+    top: 40px;
+    left: 220px;
+}
+
+#node-estacao {
+    top: 240px;
+    left: 220px;
+}
+
+#node-hospital {
+    top: 140px;
+    left: 400px;
+}
+
+#node-parque {
+    top: 140px;
+    left: 580px;
+}
+
+/* Configurações do SVG (Linhas e Números) */
+.linhas-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.linha {
+    stroke: #7B1FA2;
+    stroke-width: 3px;
+}
+
+.peso {
+    fill: #000;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+/* --- PAINEL DE CONTROLES (Menus e Botão) --- */
+.controles {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; 
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #7B1FA2;
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.btn-mostrar {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #7B1FA2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-mostrar:hover {
+    background-color: #4A148C;
+}
+
+
+#resultado {
+    margin-top: 30px; 
+    text-align: center; 
+    font-size: 18px;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini GPS - Dijkstra</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Mini GPS com Dijkstra</h1>
+
+    <div class="map">
+        <svg class="linhas-svg">
+            <line x1="80" y1="180" x2="260" y2="80" class="linha" />   
+            <line x1="80" y1="180" x2="260" y2="280" class="linha" />  
+            <line x1="260" y1="80" x2="440" y2="180" class="linha" />  
+            <line x1="260" y1="280" x2="440" y2="180" class="linha" /> 
+            <line x1="440" y1="180" x2="620" y2="180" class="linha" /> 
+
+            <text x="155" y="120" class="peso">5</text>  
+            <text x="155" y="250" class="peso">2</text>  
+            <text x="360" y="120" class="peso">1</text>  
+            <text x="360" y="250" class="peso">3</text>  
+            <text x="525" y="170" class="peso">4</text>  
+        </svg>
+
+        <div class="node" id="node-praca">Praça</div> 
+        <div class="node" id="node-mercado">Mercado</div>
+        <div class="node" id="node-estacao">Estação</div>
+        <div class="node" id="node-hospital">Hospital</div>
+        <div class="node" id="node-parque">Parque</div>
+    </div>
+
+    <div class="controles">
+        <label for="origem">Sair de:</label>
+        <select id="origem">
+            <option value="Praça">Praça</option>
+            <option value="Mercado">Mercado</option>
+            <option value="Estação">Estação</option>
+            <option value="Hospital">Hospital</option>
+            <option value="Parque">Parque</option>
+        </select>
+
+        <label for="destino">Ir para:</label>
+        <select id="destino">
+            <option value="Praça">Praça</option>
+            <option value="Mercado">Mercado</option>
+            <option value="Estação">Estação</option>
+            <option value="Hospital">Hospital</option>
+            <option value="Parque" selected>Parque</option>
+        </select>
+
+        <button class="btn-mostrar" onclick="mostrarCaminho()">Mostrar Caminho</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
